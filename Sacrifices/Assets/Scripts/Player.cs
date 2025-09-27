@@ -4,7 +4,6 @@ using System.Collections;
 public class AnimationWithDelay : MonoBehaviour
 {
     private Animator animator;
-    //not chatgpt code trust
 
     void Start()
     {
