@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     private float health = 20;
+    private float speed = 5;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,9 +17,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (UnityEngine.Random.Range(1, 100) > 50)
-            rb.AddForceX(20);
+            rb.AddForceX(speed);
         else
-            rb.AddForceX(-20);
+            rb.AddForceX(-speed);
     }
 
     public float getHp()
@@ -29,5 +30,15 @@ public class Enemy : MonoBehaviour
     public void addHp(float amt)
     {
         health += amt;
+    }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
+    public void addSpeed(float amt)
+    {
+        speed += amt;
     }
 }
