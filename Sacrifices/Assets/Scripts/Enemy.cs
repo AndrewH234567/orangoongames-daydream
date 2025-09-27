@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
 
     private Rigidbody2D rb;
-    private float head;
+    private float health = 20;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,5 +19,15 @@ public class Enemy : MonoBehaviour
             rb.AddForceX(20);
         else
             rb.AddForceX(-20);
+    }
+
+    public float getHp()
+    {
+        return health;
+    }
+
+    public void addHp(float amt)
+    {
+        health += amt;
     }
 }
