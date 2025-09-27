@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,9 @@ public class Player : MonoBehaviour
 
     public Vector2 movement;
     private bool isJumping = false;
+
     [SerializeField] private InputHandler inputHandler;
+    [SerializeField] private Animator animator;
 
 
     void Awake()
@@ -21,11 +24,13 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<InputHandler>();
-
+        animator = GetComponent<Animator>();
         if (inputHandler == null)
         {
             Debug.LogError("Player.cs cannot find the InputHandler component! Make sure InputHandler.cs is attached to this GameObject.");
         }
+
+        StartCoroutine(slowAnimation());
 
         /*
         // 2. Instantiate the generated Input Actions class
@@ -65,6 +70,17 @@ public class Player : MonoBehaviour
         */
         handleHorizontalMovement();
 
+    }
+
+    IEnumerator slowAnimation()
+    {
+        while (true)
+        {
+            animator.speed = 1;
+            yield return new WaitForSeconds(0.155f);
+            animator.speed = 0;
+            yield return new WaitForSeconds(0.155f);
+        }
     }
     
     private void handleHorizontalMovement()
