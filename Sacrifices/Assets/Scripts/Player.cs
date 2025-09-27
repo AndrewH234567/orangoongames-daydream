@@ -1,16 +1,25 @@
 using UnityEngine;
+using System.Collections;
 
-public class Player : MonoBehaviour
+public class AnimationWithDelay : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Animator animator;
+    //not chatgpt code trust
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        StartCoroutine(SlowAnimation());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SlowAnimation()
     {
-        
+        while (true)
+        {
+            animator.speed = 1;  // Play one frame or a bit
+            yield return new WaitForSeconds(0.155f);  // wait 155 ms
+            animator.speed = 0;  // pause animation
+            yield return new WaitForSeconds(0.155f);  // wait 155 ms before next step
+        }
     }
 }
