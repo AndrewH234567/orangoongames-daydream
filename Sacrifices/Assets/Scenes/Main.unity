@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 106952169}
   - component: {fileID: 106952173}
   - component: {fileID: 106952174}
+  - component: {fileID: 106952176}
+  - component: {fileID: 106952175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -320,6 +322,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947029caec4fc294e950bf9612c7f9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlowDownAnimation
+--- !u!114 &106952175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106952168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0102ff9c9bc4e175bf1629dd65c857b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  moveSpeed: 5
+  jumpForce: 8
+  movement: {x: 0, y: 0}
+  inputHandler: {fileID: 0}
+  animator: {fileID: 0}
+--- !u!114 &106952176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106952168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f897633fbd61be92dbaf13d4a1c5a5a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  movement: {x: 0, y: 0}
+  deadzone: 0.2
 --- !u!1 &848736159
 GameObject:
   m_ObjectHideFlags: 0
