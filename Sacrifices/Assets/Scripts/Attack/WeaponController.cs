@@ -7,6 +7,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Entity parent;
 
     [SerializeField] private Transform firePoint;
+
+    [SerializeField] private WeaponAnimationController weaponAnimationController;
     
     [Header("Behavior Settings")]
     [Tooltip("Check for Ranged (default) | Uncheck for Melee (shotgun-style)")]
