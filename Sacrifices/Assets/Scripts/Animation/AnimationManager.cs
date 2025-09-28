@@ -16,8 +16,8 @@ public class AnimationManager : MonoBehaviour
     [Tooltip("Vertical speed threshold to consider the player airborne.")]
     [SerializeField] private float airThreshold = 0.05f;
 
-    private enum MovementState { Idle, Walking, Jumping, Falling }
-    private MovementState currentState = MovementState.Idle;
+    [SerializeField] private enum MovementState { Idle, Walking, Jumping, Falling }
+    [SerializeField] private MovementState currentState = MovementState.Idle;
 
 
     void Awake()
@@ -70,10 +70,11 @@ public class AnimationManager : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        anim.speed = Mathf.Abs(rb.linearVelocityX);
 
         bool isAirborne = currentState == MovementState.Jumping || currentState == MovementState.Falling;
         anim.SetBool("IsAirborne", isAirborne);
+        anim.SetBool("IsIdle", currentState == MovementState.Idle);
     }
 
     // ----------------------
