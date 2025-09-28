@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,6 +14,8 @@ public class Player : Entity
     private Animator animator;
 
     private GroundDetector groundDetector;
+
+    public int[] banned = { };
 
     public int Score = 0;
 
@@ -28,6 +33,8 @@ public class Player : Entity
         groundDetector = GetComponentInChildren<GroundDetector>();
 
         StartCoroutine(slowAnimation());
+
+        InvokeRepeating("Ban", 30f, 30f);
 
         /*
         // 2. Instantiate the generated Input Actions class
@@ -152,5 +159,23 @@ public class Player : Entity
     public WeaponController GetWeaponController()
     {
         return weaponController;
+    }
+
+    private void Ban()
+    {
+        int rng = UnityEngine.Random.Range(0, 2 - banned.Length);
+        banned.Append(rng);
+        if (rng == 0)
+        {
+            Alert.Instance.Update("You cant use pistol anymore");
+        }
+        else if (rng == 1)
+        {
+            Alert.Instance.Update("You cant use sword anymore");
+        }
+        else
+        {
+            Alert.Instance.Update("You cant use minigun anymore");     
+        }
     }
 }

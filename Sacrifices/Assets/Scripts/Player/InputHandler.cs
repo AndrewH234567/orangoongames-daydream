@@ -99,20 +99,20 @@ public class InputHandler : MonoBehaviour
 
     private void GetWeapon0(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 0;
+        if (context.ReadValue<float>() >= deadzone && Array.Exists(Player.Instance.banned, element => element == 0)) Player.Instance.GetWeaponController().weaponId = 0;
     }
 
     private void GetWeapon1(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 1;
+        if (context.ReadValue<float>() >= deadzone && !Array.Exists(Player.Instance.banned, element => element == 1)) Player.Instance.GetWeaponController().weaponId = 1;
     }
     private void GetWeapon2(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 2;
+        if (context.ReadValue<float>() >= deadzone && !Array.Exists(Player.Instance.banned, element => element == 2)) Player.Instance.GetWeaponController().weaponId = 2;
     }
     private void GetWeapon3(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 3;
+        if (context.ReadValue<float>() >= deadzone && !Array.Exists(Player.Instance.banned, element => element == 3)) Player.Instance.GetWeaponController().weaponId = 3;
     }
     private void GetWeapon4(InputAction.CallbackContext context)
     {
