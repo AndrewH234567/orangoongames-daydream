@@ -21,7 +21,7 @@ public class KeyboardActivator : MonoBehaviour
 
     void OnDisable()
     {
-        activationAction.Disable();
+        activationAction.Enable();
     }
 
 
