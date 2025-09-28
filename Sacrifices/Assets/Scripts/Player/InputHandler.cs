@@ -25,6 +25,14 @@ public class InputHandler : MonoBehaviour
         playerActions.Controls.AimDown.canceled += GetDownAttackDirection;
         playerActions.Controls.SwapWeapon0.performed += GetWeapon0;
         playerActions.Controls.SwapWeapon1.performed += GetWeapon1;
+        playerActions.Controls.SwapWeapon2.performed += GetWeapon2;
+        playerActions.Controls.SwapWeapon3.performed += GetWeapon3;
+        playerActions.Controls.SwapWeapon4.performed += GetWeapon4;
+        playerActions.Controls.SwapWeapon5.performed += GetWeapon5;
+        playerActions.Controls.SwapWeapon6.performed += GetWeapon6;
+        playerActions.Controls.SwapWeapon7.performed += GetWeapon7;
+        playerActions.Controls.SwapWeapon8.performed += GetWeapon8;
+
 
         /*
         inputActions.PlayerActionMap.Shoot.performed += GetShootInput;
@@ -97,5 +105,33 @@ public class InputHandler : MonoBehaviour
     private void GetWeapon1(InputAction.CallbackContext context)
     {
         if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 1;
+    }
+    private void GetWeapon2(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 2;
+    }
+    private void GetWeapon3(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 3;
+    }
+    private void GetWeapon4(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 4;
+    }
+    private void GetWeapon5(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 5;
+    }
+    private void GetWeapon6(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 6;
+    }
+    private void GetWeapon7(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 7;
+    }
+    private void GetWeapon8(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 8;
     }
 }

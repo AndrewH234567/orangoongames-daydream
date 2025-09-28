@@ -53,11 +53,18 @@ public class WeaponController : MonoBehaviour
         if (isFlipped) aimDirection = new Vector2(-aimDirection.x, aimDirection.y);
         if (weaponId == 0)
         {
+            fireRate = 0.5f;
             FireRanged(aimDirection);
         }
         else if (weaponId == 1)
         {
+            fireRate = 0.5f;
             FireMelee(aimDirection);
+        }
+        else if (weaponId == 2)
+        {
+            fireRate = 0.05f;
+            FireMini(aimDirection);
         }
         weaponAnimationController.StartAttackAnimation();
     }
@@ -110,18 +117,23 @@ public class WeaponController : MonoBehaviour
         SpawnProjectile(direction, direction, 1, 0f);
     }
 
+   private void FireMini(Vector2 direction)
+    {
+        SpawnProjectile(direction, direction, 1, 0f);
+    }
+
     private void FireMelee(Vector2 direction)
     {
         // Melee is a spread of projectiles with a very short lifeTime
-        
+
         // Calculate the starting angle based on the direction vector
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float halfSpread = spreadAngle / 2f;
-        
+
         for (int i = 0; i < projectilesPerShot; i++)
         {
             float angleOffset = -halfSpread + (float)i / (projectilesPerShot - 1) * spreadAngle;
-            
+
             float finalAngle = baseAngle + angleOffset;
             Vector2 spreadDirection = new Vector2(
                 Mathf.Cos(finalAngle * Mathf.Deg2Rad),
@@ -136,7 +148,7 @@ public class WeaponController : MonoBehaviour
     {
         Projectile newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
         
-        float projectileLifeTime = weaponId == 0 ? 5f : meleeLifeTime;
+        float projectileLifeTime = weaponId == 1 ? meleeLifeTime : 5f;
         
         newProjectile.Initialize(
             travelDirection,
