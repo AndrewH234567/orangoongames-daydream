@@ -13,6 +13,6 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-        slider.value = entity.getHp();
+        slider.value = entity.GetHp();
     }
 }

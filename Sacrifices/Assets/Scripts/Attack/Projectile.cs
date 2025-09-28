@@ -43,8 +43,8 @@ public class Projectile : MonoBehaviour
 
             // Apply damage here
             // entity.TakeDamage(damage);
-            entity.addHp(-damage);
-            float newHP = entity.getHp();
+            entity.AddHp(-damage);
+            float newHP = entity.GetHp();
             Debug.Log(newHP);
         }
 
