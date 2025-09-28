@@ -1,0 +1,98 @@
+using UnityEngine;
+
+public class WeaponController : MonoBehaviour
+{
+    [Header("Weapon Setup")]
+    [SerializeField] private Projectile projectile;
+    [SerializeField] private Transform firePoint; 
+    
+    [Header("Behavior Settings")]
+    [Tooltip("Check for Ranged (default) | Uncheck for Melee (shotgun-style)")]
+    public bool isRanged = true; 
+
+    [Header("Stats")]
+    public float damage = 1f;
+    public float projectileSpeed = 10f;
+    public float fireRate = 0.5f;
+
+    [Header("Melee/Shotgun Only")]
+    [Tooltip("Projectiles to spawn for the 'hitbox'")]
+    public int projectilesPerShot = 5;
+    [Tooltip("Total spread angle in degrees (e.g., 40 for a wide arc)")]
+    public float spreadAngle = 40f; 
+    public float meleeLifeTime = 0.15f;
+
+    private float nextFireTime = 0f;
+
+    // --- Public method called by your InputHandler when Attack is pressed ---
+    public void TryAttack(Vector2 aimDirection)
+    {
+        if (Time.time < nextFireTime)
+        {
+            return;
+        }
+
+        // Calculate the next time we can fire
+        nextFireTime = Time.time + fireRate;
+
+        // Ensure we have a fire point and a projectile prefab
+        if (firePoint == null || projectile == null)
+        {
+            Debug.LogError("WeaponController is missing Fire Point or Projectile Prefab reference!");
+            return;
+        }
+
+        if (isRanged)
+        {
+            FireRanged(aimDirection);
+        }
+        else
+        {
+            FireMelee(aimDirection);
+        }
+    }
+
+    private void FireRanged(Vector2 direction)
+    {
+        SpawnProjectile(direction, direction, 1, 0f);
+    }
+
+    private void FireMelee(Vector2 direction)
+    {
+        // Melee is a spread of projectiles with a very short lifeTime
+        
+        // Calculate the starting angle based on the direction vector
+        float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float halfSpread = spreadAngle / 2f;
+        
+        for (int i = 0; i < projectilesPerShot; i++)
+        {
+            float angleOffset = -halfSpread + (float)i / (projectilesPerShot - 1) * spreadAngle;
+            
+            float finalAngle = baseAngle + angleOffset;
+            Vector2 spreadDirection = new Vector2(
+                Mathf.Cos(finalAngle * Mathf.Deg2Rad),
+                Mathf.Sin(finalAngle * Mathf.Deg2Rad)
+            );
+
+            SpawnProjectile(spreadDirection, direction, projectilesPerShot, angleOffset);
+        }
+    }
+
+    private void SpawnProjectile(Vector2 travelDirection, Vector2 aimDirection, int burstCount, float angleOffset)
+    {
+        Projectile newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
+        
+        float projectileLifeTime = isRanged ? 5f : meleeLifeTime;
+        
+        newProjectile.Initialize(
+            travelDirection,
+            projectileSpeed,
+            damage,
+            projectileLifeTime,
+            this.gameObject
+        );
+
+        newProjectile.transform.right = travelDirection;
+    }
+}

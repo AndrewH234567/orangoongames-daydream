@@ -4,11 +4,21 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
 
+    [Header("Movement Attributes")]
+    [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] public float jumpForce = 8f;
+    [SerializeField] public bool isJumping = false;
+
+    protected float currentFacingDirection = 1f;
+
+    [Header("DEBUG")]
+
+    public Vector2 movement;
+
     protected Rigidbody2D rb;
     protected float health = 20;
-    protected float speed = 5;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -31,11 +41,11 @@ public class Entity : MonoBehaviour
 
     public float getSpeed()
     {
-        return speed;
+        return moveSpeed;
     }
 
     public void addSpeed(float amt)
     {
-        speed += amt;
+        moveSpeed += amt;
     }
 }
