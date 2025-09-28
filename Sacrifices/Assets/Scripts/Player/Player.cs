@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : Entity
 {
@@ -10,6 +11,8 @@ public class Player : Entity
     private Animator animator;
 
     private GroundDetector groundDetector;
+
+    public int Score = 0;
 
     [Header("Assigns")]
     [SerializeField] private WeaponController weaponController;
