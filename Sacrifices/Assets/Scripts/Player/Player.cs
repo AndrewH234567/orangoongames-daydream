@@ -5,22 +5,36 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro; // 1. IMPORTANT: Add this namespace
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : Entity
 {
-
     private InputHandler inputHandler;
     private Animator animator;
-
     private GroundDetector groundDetector;
 
     public int[] banned = { };
 
-    public int Score = 0;
+    // 2. Change 'Score' to a property with a setter to update the UI
+    private int scoreValue = 0;
+    public int Score
+    {
+        get { return scoreValue; }
+        set
+        {
+            scoreValue = value;
+            // Call the method to update the UI whenever the score changes
+            UpdateScoreUI();
+        }
+    }
 
     [Header("Assigns")]
     [SerializeField] private WeaponController weaponController;
+
+    // 3. New: Reference to the TextMeshPro component
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI scoreText; // Use TextMeshProUGUI for UI elements
 
     public static Player Instance;
 
@@ -40,38 +54,12 @@ public class Player : Entity
         // 2. Instantiate the generated Input Actions class
         playerControls = new PlayerActions();
 
-        // === Input Callbacks for Separate Actions ===
-
-        // Horizontal Movement
-        playerControls.Movement.Left.performed += ctx => { leftHeld = true; UpdateHorizontalInput(); };
-        playerControls.Movement.Left.canceled += ctx => { leftHeld = false; UpdateHorizontalInput(); };
-
-        playerControls.Movement.Right.performed += ctx => { rightHeld = true; UpdateHorizontalInput(); };
-        playerControls.Movement.Right.canceled += ctx => { rightHeld = false; UpdateHorizontalInput(); };
-
-        // Vertical Aiming
-        playerControls.Movement.AimUp.performed += ctx => verticalAimInput = 1f;
-        playerControls.Movement.AimUp.canceled += ctx => verticalAimInput = 0f;
-
-        playerControls.Movement.AimDown.performed += ctx => verticalAimInput = -1f;
-        playerControls.Movement.AimDown.canceled += ctx => verticalAimInput = 0f;
-        */
+        /* ... (Input setup commented out) ... */
     }
 
     void Update()
     {
-
-        // === 2. Hollow Knight-style Aim/Look Input ===
-        /*
-        if (verticalAimInput > 0)
-        {
-            Debug.Log("Looking Up");
-        }
-        else if (verticalAimInput < 0)
-        {
-            Debug.Log("Looking Down");
-        }
-        */
+        /* ... (Hollow Knight-style Aim/Look Input commented out) ... */
         handleHorizontalMovement();
         handleJump();
         float horizontalMove = Mathf.Abs(rb.linearVelocity.x);
@@ -86,6 +74,20 @@ public class Player : Entity
         handleAttack();
     }
 
+    // 5. Method to update the text box
+    private void UpdateScoreUI()
+    {
+        if (scoreText != null)
+        {
+            // Set the text property using an interpolated string
+            scoreText.text = $"Score: {scoreValue}";
+        }
+        else
+        {
+            Debug.LogWarning("Score TextMeshPro component is not assigned in the Inspector.");
+        }
+    }
+
     IEnumerator slowAnimation()
     {
         while (true)
@@ -97,6 +99,7 @@ public class Player : Entity
         }
     }
 
+    // ... (Other methods remain the same) ...
     private void handleHorizontalMovement()
     {
         movement = inputHandler.movement;
@@ -120,13 +123,12 @@ public class Player : Entity
     {
         if (inputHandler.isFirePressed)
         {
-            float verticalInput = inputHandler.verticalAimInput; // (You need to add this property in InputHandler)
+            float verticalInput = inputHandler.verticalAimInput;
 
             Vector2 aimDirection = new Vector2(currentFacingDirection, 0f);
 
             if (verticalInput > 0.5f)
             {
-                // Aim diagonally up
                 aimDirection = new Vector2(currentFacingDirection, 1f);
             }
             else if (verticalInput < -0.5f)
@@ -134,7 +136,6 @@ public class Player : Entity
                 aimDirection = new Vector2(currentFacingDirection, -1f);
             }
 
-            // The key is to normalize it so the resulting vector has a length of 1
             aimDirection = aimDirection.normalized;
 
             if (weaponController != null)
