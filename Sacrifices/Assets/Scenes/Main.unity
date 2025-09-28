@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6c78784e8014e0792c887310fdf380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WormSpawner
-  wormSpawnerPrefab: {fileID: 0}
+  wormSpawnerPrefab: {fileID: 2604093500997856207, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
   spawnPoints:
   - {fileID: 63769808}
   - {fileID: 1548598848}
@@ -1743,13 +1743,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: WormEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3973638837791073409, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2604093500997856207, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3973638837791073409, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973638837791073409, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4767146372203556552, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1790,6 +1794,14 @@ PrefabInstance:
     - target: {fileID: 4767146372203556552, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086464638506012191, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.27953637
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086464638506012191, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.003245294
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 254458941016488816, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
@@ -4796,7 +4808,7 @@ Transform:
   m_GameObject: {fileID: 1278874040}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6, y: 5.39, z: 0}
+  m_LocalPosition: {x: 4.35, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
