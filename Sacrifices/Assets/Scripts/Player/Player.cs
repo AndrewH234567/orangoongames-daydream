@@ -3,14 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     // Configuration Fields
     [Header("Movement")]
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpForce = 8f;
-
-    private Rigidbody2D rb;
 
     public Vector2 movement;
     private bool isJumping = false;
@@ -25,10 +23,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<InputHandler>();
         animator = GetComponent<Animator>();
-        if (inputHandler == null)
-        {
-            Debug.LogError("Player.cs cannot find the InputHandler component! Make sure InputHandler.cs is attached to this GameObject.");
-        }
 
         StartCoroutine(slowAnimation());
 
