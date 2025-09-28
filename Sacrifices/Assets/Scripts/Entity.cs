@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public float GetHp()
@@ -47,5 +47,10 @@ public class Entity : MonoBehaviour
     public void AddSpeed(float amt)
     {
         moveSpeed += amt;
+    }
+
+    public Rigidbody2D getRigidBody()
+    {
+        return rb;
     }
 }

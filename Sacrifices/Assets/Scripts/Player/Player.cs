@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 public class Player : Entity
 {
 
-    [SerializeField] private InputHandler inputHandler;
-    [SerializeField] private Animator animator;
+    private InputHandler inputHandler;
+    private Animator animator;
 
     private GroundDetector groundDetector;
 
-    private WeaponController weaponController;
+    [Header("Assigns")]
+    [SerializeField] private WeaponController weaponController;
 
     public static Player Instance;
 
@@ -22,7 +23,6 @@ public class Player : Entity
         inputHandler = GetComponent<InputHandler>();
         animator = GetComponent<Animator>();
         groundDetector = GetComponentInChildren<GroundDetector>();
-        weaponController = GetComponent<WeaponController>();
 
         StartCoroutine(slowAnimation());
 
