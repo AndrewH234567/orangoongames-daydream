@@ -471,6 +471,7 @@ MonoBehaviour:
   jumpForce: 8
   isJumping: 0
   movement: {x: 0, y: 0}
+  banned: 
   weaponController: {fileID: 2027522516}
   scoreText: {fileID: 1426638499}
 --- !u!114 &106952176
@@ -5669,7 +5670,7 @@ GameObject:
   - component: {fileID: 1426638500}
   - component: {fileID: 1426638499}
   m_Layer: 5
-  m_Name: Score
+  m_Name: Score1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6474,6 +6475,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5607320583244383826, guid: 918bacdc82114a24d910f09e4b5d0dd0, type: 3}
   m_PrefabInstance: {fileID: 468009239}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1802349599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1802349601}
+  - component: {fileID: 1802349600}
+  m_Layer: 0
+  m_Name: Bootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1802349600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802349599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf29993f8435442d817bac19eb4fc12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
+--- !u!4 &1802349601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802349599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00541, y: -4.6631, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1808055635 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5607320583244383826, guid: 918bacdc82114a24d910f09e4b5d0dd0, type: 3}
@@ -7217,3 +7262,4 @@ SceneRoots:
   - {fileID: 199299576}
   - {fileID: 1172066184}
   - {fileID: 160406126}
+  - {fileID: 1802349601}
