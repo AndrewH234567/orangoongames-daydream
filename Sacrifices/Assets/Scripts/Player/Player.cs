@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro; // 1. IMPORTANT: Add this namespace
@@ -10,6 +13,8 @@ public class Player : Entity
     private InputHandler inputHandler;
     private Animator animator;
     private GroundDetector groundDetector;
+
+    public int[] banned = { };
 
     // 2. Change 'Score' to a property with a setter to update the UI
     private int scoreValue = 0;
@@ -43,8 +48,11 @@ public class Player : Entity
 
         StartCoroutine(slowAnimation());
 
-        // 4. Initial UI update on start
-        UpdateScoreUI();
+        InvokeRepeating("Ban", 30f, 30f);
+
+        /*
+        // 2. Instantiate the generated Input Actions class
+        playerControls = new PlayerActions();
 
         /* ... (Input setup commented out) ... */
     }
@@ -152,5 +160,23 @@ public class Player : Entity
     public WeaponController GetWeaponController()
     {
         return weaponController;
+    }
+
+    private void Ban()
+    {
+        int rng = UnityEngine.Random.Range(0, 2 - banned.Length);
+        banned.Append(rng);
+        if (rng == 0)
+        {
+            Alert.Instance.Update("You cant use pistol anymore");
+        }
+        else if (rng == 1)
+        {
+            Alert.Instance.Update("You cant use sword anymore");
+        }
+        else
+        {
+            Alert.Instance.Update("You cant use minigun anymore");     
+        }
     }
 }
