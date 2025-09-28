@@ -12,5 +12,7 @@ public class Enemy : Entity
             rb.AddForceX(moveSpeed);
         else
             rb.AddForceX(-moveSpeed);
+        
+        
     }
 }

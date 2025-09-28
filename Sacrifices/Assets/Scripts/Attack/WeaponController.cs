@@ -11,7 +11,6 @@ public class WeaponController : MonoBehaviour
     public bool isRanged = true; 
 
     [Header("Stats")]
-    public float damage = 1f;
     public float projectileSpeed = 10f;
     public float fireRate = 0.5f;
 
@@ -88,7 +87,6 @@ public class WeaponController : MonoBehaviour
         newProjectile.Initialize(
             travelDirection,
             projectileSpeed,
-            damage,
             projectileLifeTime,
             this.gameObject
         );

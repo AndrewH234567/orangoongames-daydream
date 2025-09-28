@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     
     private Rigidbody2D rb;
     
-    public float damage;
+    public float damage = 1;
     public GameObject parent;
 
     void Awake()
@@ -15,9 +15,8 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize(Vector2 direction, float speed, float damageAmount, float projectileLifeTime, GameObject parent)
+    public void Initialize(Vector2 direction, float speed, float projectileLifeTime, GameObject parent)
     {
-        damage = damageAmount;
         lifeTime = projectileLifeTime;
         this.parent = parent;
 
@@ -34,16 +33,24 @@ public class Projectile : MonoBehaviour
     {
         // Ignore collision with the owner/self-hit
         if (other.gameObject == parent || other.name == name)
-        {
             return;
+
+        // Get the Entity (or subclass) component, if it exists
+        Entity entity = other.GetComponent<Entity>();
+        if (entity != null)
+        {
+            Debug.Log($"Projectile hit an Entity: {entity.name}");
+
+            // Apply damage here
+            // entity.TakeDamage(damage);
+            entity.addHp(-damage);
+            float newHP = entity.getHp();
+            Debug.Log(newHP);
         }
 
-        // --- PLACEHOLDER DAMAGE LOGIC ---
-        // In a real game, you would check for a "Health" component here.
-        Debug.Log($"Projectile hit: {other.name}. Applying {damage} damage.");
-        
         DestroyProjectile();
     }
+
 
     private void DestroyProjectile()
     {
