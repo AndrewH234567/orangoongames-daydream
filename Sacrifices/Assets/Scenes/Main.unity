@@ -3775,6 +3775,7 @@ GameObject:
   - component: {fileID: 1241751004}
   - component: {fileID: 1241751003}
   - component: {fileID: 1241751002}
+  - component: {fileID: 1241751005}
   m_Layer: 5
   m_Name: ShowMainInventoryButton
   m_TagString: Untagged
@@ -3907,6 +3908,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241751000}
   m_CullTransparentMesh: 1
+--- !u!114 &1241751005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241751000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3f909b5bc60ed40b80626cbf75248d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyboardActivator
+  activationAction:
+    m_Name: Activation
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e20f6d5d-6ce2-452c-9f3a-9148f22e3a7a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c5b44405-2839-49ef-8fb3-e26b118a5b9f
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Activation
+      m_Flags: 0
+    m_Flags: 0
+  mainInventory: {fileID: 299876119}
+  showMainButton: {fileID: 1241751000}
 --- !u!1001 &1252381785
 PrefabInstance:
   m_ObjectHideFlags: 0
