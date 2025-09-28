@@ -13,9 +13,11 @@ public class Player : Entity
 
     private WeaponController weaponController;
 
+    public static Player Instance;
+
     void Awake()
     {
-
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<InputHandler>();
         animator = GetComponent<Animator>();
@@ -134,5 +136,18 @@ public class Player : Entity
                 Debug.LogWarning("Weapon Controller is null");
             }
         }
+    }
+
+    public void handleSwitch(int key)
+    {
+        if (key == 1)
+            weaponController.weaponId = 0;
+        else if (key == 2)
+            weaponController.weaponId = 1;
+    }
+
+    public WeaponController GetWeaponController()
+    {
+        return weaponController;
     }
 }
