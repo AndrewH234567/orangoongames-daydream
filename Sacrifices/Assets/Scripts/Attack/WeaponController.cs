@@ -54,16 +54,19 @@ public class WeaponController : MonoBehaviour
         if (weaponId == 0)
         {
             fireRate = 0.5f;
+            projectile.damage = 4;
             FireRanged(aimDirection);
         }
         else if (weaponId == 1)
         {
             fireRate = 0.5f;
+            projectile.damage = 2;
             FireMelee(aimDirection);
         }
         else if (weaponId == 2)
         {
             fireRate = 0.05f;
+            projectile.damage = 0.7f;
             FireMini(aimDirection);
         }
         weaponAnimationController.StartAttackAnimation();

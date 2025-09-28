@@ -6573,6 +6573,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106952175}
     - target: {fileID: 8477544240823948397, guid: ba73bec17c1d0a8a295fa7f404a45eef, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3981218612730558492, guid: 0ac861ef6a2f168cda1816ff849d3c44, type: 3}
+    - target: {fileID: 8477544240823948397, guid: ba73bec17c1d0a8a295fa7f404a45eef, type: 3}
       propertyPath: weaponAnimationController
       value: 
       objectReference: {fileID: 2027522514}
