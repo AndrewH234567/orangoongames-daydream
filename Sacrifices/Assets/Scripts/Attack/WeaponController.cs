@@ -59,6 +59,7 @@ public class WeaponController : MonoBehaviour
         {
             FireMelee(aimDirection);
         }
+        weaponAnimationController.StartAttackAnimation();
     }
 
     void Awake()
@@ -75,12 +76,12 @@ public class WeaponController : MonoBehaviour
     {
         float horizontalVelocity = parent.getRigidBody().linearVelocity.x;
 
-        if (horizontalVelocity > 0.01f) // Moving Right
+        if (horizontalVelocity > 0.05f) // Moving Right
         {
             firePoint.GetComponent<SpriteRenderer>().flipX = false; //Make this get from an actual weapon class
             FlipFirePoint(false); // Player faces right
         }
-        else if (horizontalVelocity < -0.01f) // Moving Left
+        else if (horizontalVelocity < -0.05f) // Moving Left
         {
             firePoint.GetComponent<SpriteRenderer>().flipX = true;
             FlipFirePoint(true); // Player faces left
