@@ -29,22 +29,22 @@ public class Entity : MonoBehaviour
         
     }
 
-    public float getHp()
+    public float GetHp()
     {
         return health;
     }
 
-    public void addHp(float amt)
+    public void AddHp(float amt)
     {
         health += amt;
     }
 
-    public float getSpeed()
+    public float GetSpeed()
     {
         return moveSpeed;
     }
 
-    public void addSpeed(float amt)
+    public void AddSpeed(float amt)
     {
         moveSpeed += amt;
     }

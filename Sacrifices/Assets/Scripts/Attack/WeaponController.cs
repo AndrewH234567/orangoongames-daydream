@@ -8,7 +8,7 @@ public class WeaponController : MonoBehaviour
     
     [Header("Behavior Settings")]
     [Tooltip("Check for Ranged (default) | Uncheck for Melee (shotgun-style)")]
-    public bool isRanged = true; 
+    public int weaponId = 0; 
 
     [Header("Stats")]
     public float damage = 1f;
@@ -42,11 +42,11 @@ public class WeaponController : MonoBehaviour
             return;
         }
 
-        if (isRanged)
+        if (weaponId == 0)
         {
             FireRanged(aimDirection);
         }
-        else
+        else if (weaponId == 1)
         {
             FireMelee(aimDirection);
         }
@@ -83,7 +83,7 @@ public class WeaponController : MonoBehaviour
     {
         Projectile newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
         
-        float projectileLifeTime = isRanged ? 5f : meleeLifeTime;
+        float projectileLifeTime = weaponId == 0 ? 5f : meleeLifeTime;
         
         newProjectile.Initialize(
             travelDirection,
