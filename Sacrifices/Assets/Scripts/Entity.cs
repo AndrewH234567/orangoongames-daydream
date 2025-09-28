@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Entity : MonoBehaviour
 {
@@ -57,5 +58,6 @@ public class Entity : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+        Player.Instance.Score += 100;
     }
 }
