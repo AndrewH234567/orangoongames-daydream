@@ -6,14 +6,15 @@ public class InputHandler : MonoBehaviour
 {
     [Header("DEBUG")]
     public Vector2 movement;
+    public Boolean isUpPressed;
     public float deadzone = 0.2f;
     public PlayerActions playerActions;
 
     void Awake()
     {
         playerActions = new PlayerActions();
-        playerActions.Movement.MoveHorizontal.performed += GetMovementInput; //Subscribing the events
-        playerActions.Movement.MoveHorizontal.canceled += GetMovementInput;
+        playerActions.Controls.Move.performed += GetMovementInput; //Subscribing the events
+        playerActions.Controls.Move.canceled += GetMovementInput;
 
         /*
         inputActions.PlayerActionMap.Shoot.performed += GetShootInput;
@@ -40,17 +41,26 @@ public class InputHandler : MonoBehaviour
     
     private void OnEnable()
     {
-        playerActions.Movement.Enable();
+        playerActions.Controls.Enable();
     }
 
     private void OnDisable()
     {
         //inputActions.UIActionMap.Disable();
-        playerActions.Movement.Disable();
+        playerActions.Controls.Disable();
     }
 
     private void GetMovementInput(InputAction.CallbackContext context)
     {
-        movement = context.ReadValue<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
+        if (input.y != 0)
+        {
+            isUpPressed = true;
+        }
+        else
+        {
+            isUpPressed = false;
+        }
+        movement = new Vector2(input.x, 0);
     }
 }

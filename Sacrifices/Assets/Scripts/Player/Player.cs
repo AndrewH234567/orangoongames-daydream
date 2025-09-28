@@ -9,12 +9,13 @@ public class Player : Entity
     [Header("Movement")]
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpForce = 8f;
+    [SerializeField] public bool isJumping = false;
 
     public Vector2 movement;
-    private bool isJumping = false;
 
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private Animator animator;
+    [SerializeField] private GroundDetector groundDetector;
 
 
     void Awake()
@@ -23,6 +24,7 @@ public class Player : Entity
         rb = GetComponent<Rigidbody2D>();
         inputHandler = GetComponent<InputHandler>();
         animator = GetComponent<Animator>();
+        groundDetector = GetComponentInChildren<GroundDetector>();
 
         StartCoroutine(slowAnimation());
 
@@ -63,7 +65,7 @@ public class Player : Entity
         }
         */
         handleHorizontalMovement();
-
+        handleJump();
     }
 
     IEnumerator slowAnimation()
@@ -76,10 +78,23 @@ public class Player : Entity
             yield return new WaitForSeconds(0.155f);
         }
     }
-    
+
     private void handleHorizontalMovement()
     {
         movement = inputHandler.movement;
         rb.linearVelocityX = movement.x * moveSpeed;
+    }
+
+    private void handleJump()
+    {
+        if (inputHandler.isUpPressed && groundDetector.isGrounded && !isJumping)
+        {
+            rb.linearVelocityY += jumpForce;
+            isJumping = true;
+        }
+        if (!groundDetector.isGrounded)
+        {
+            isJumping = false;
+        }
     }
 }
