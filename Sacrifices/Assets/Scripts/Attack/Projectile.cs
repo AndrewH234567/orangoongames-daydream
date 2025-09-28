@@ -44,8 +44,12 @@ public class Projectile : MonoBehaviour
             // Apply damage here
             // entity.TakeDamage(damage);
             entity.AddHp(-damage);
-            float newHP = entity.GetHp();
-            Debug.Log(newHP);
+            //float newHP = entity.GetHp();
+            //Debug.Log(newHP);
+            if (entity.GetHp() <= 0)
+            {
+                entity.Die();
+            }
         }
 
         DestroyProjectile();

@@ -53,4 +53,9 @@ public class Entity : MonoBehaviour
     {
         return rb;
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
