@@ -4,7 +4,9 @@ public class WeaponController : MonoBehaviour
 {
     [Header("Weapon Setup")]
     [SerializeField] private Projectile projectile;
-    [SerializeField] private Transform firePoint; 
+    [SerializeField] private Entity parent;
+
+    [SerializeField] private Transform firePoint;
     
     [Header("Behavior Settings")]
     [Tooltip("Check for Ranged (default) | Uncheck for Melee (shotgun-style)")]
@@ -24,6 +26,11 @@ public class WeaponController : MonoBehaviour
 
     private float nextFireTime = 0f;
 
+    private Vector3 originalFirePointLocalPosition;
+
+    private bool isFlipped = false;
+
+
     // --- Public method called by your InputHandler when Attack is pressed ---
     public void TryAttack(Vector2 aimDirection)
     {
@@ -42,6 +49,7 @@ public class WeaponController : MonoBehaviour
             return;
         }
 
+        if (isFlipped) aimDirection = new Vector2(-aimDirection.x, aimDirection.y);
         if (isRanged)
         {
             FireRanged(aimDirection);
@@ -50,6 +58,49 @@ public class WeaponController : MonoBehaviour
         {
             FireMelee(aimDirection);
         }
+    }
+
+    void Awake()
+    {
+        originalFirePointLocalPosition = firePoint.localPosition;
+    }
+
+    void Update()
+    {
+        FlipSprite();
+    }
+
+    private void FlipSprite()
+    {
+        float horizontalVelocity = parent.getRigidBody().linearVelocity.x;
+
+        if (horizontalVelocity > 0.01f) // Moving Right
+        {
+            firePoint.GetComponent<SpriteRenderer>().flipX = false; //Make this get from an actual weapon class
+            FlipFirePoint(false); // Player faces right
+        }
+        else if (horizontalVelocity < -0.01f) // Moving Left
+        {
+            firePoint.GetComponent<SpriteRenderer>().flipX = true;
+            FlipFirePoint(true); // Player faces left
+        }
+    }
+
+    private void FlipFirePoint(bool facingLeft)
+    {
+        if (firePoint == null) return;
+        isFlipped = facingLeft;
+
+        Vector3 newPosition = originalFirePointLocalPosition;
+
+        if (facingLeft)
+        {
+            // Invert the X position to move it to the opposite side
+            newPosition.x = -originalFirePointLocalPosition.x;
+        }
+
+        // Apply the new local position
+        firePoint.localPosition = newPosition;
     }
 
     private void FireRanged(Vector2 direction)

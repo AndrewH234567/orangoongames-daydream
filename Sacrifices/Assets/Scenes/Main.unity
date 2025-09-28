@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 106952176}
   - component: {fileID: 106952175}
   - component: {fileID: 106952177}
-  - component: {fileID: 106952178}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -329,8 +328,7 @@ MonoBehaviour:
   jumpForce: 8
   isJumping: 0
   movement: {x: 0, y: 0}
-  inputHandler: {fileID: 0}
-  animator: {fileID: 0}
+  weaponController: {fileID: 1964646707}
 --- !u!114 &106952176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,27 +360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
   walkThreshold: 0.1
   airThreshold: 0.05
---- !u!114 &106952178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106952168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f554beb3d6b53819f06ad62ab3eb55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  projectile: {fileID: 3981218612730558492, guid: 0ac861ef6a2f168cda1816ff849d3c44, type: 3}
-  firePoint: {fileID: 1964646705}
-  isRanged: 1
-  damage: 1
-  projectileSpeed: 100
-  fireRate: 0.5
-  projectilesPerShot: 5
-  spreadAngle: 40
-  meleeLifeTime: 0.15
 --- !u!1 &848736159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964646705}
   - component: {fileID: 1964646706}
+  - component: {fileID: 1964646707}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1116,6 +1094,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1964646707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964646704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f554beb3d6b53819f06ad62ab3eb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
+  projectile: {fileID: 3981218612730558492, guid: 0ac861ef6a2f168cda1816ff849d3c44, type: 3}
+  parent: {fileID: 106952175}
+  firePoint: {fileID: 1964646705}
+  isRanged: 1
+  damage: 1
+  projectileSpeed: 10
+  fireRate: 0.5
+  projectilesPerShot: 5
+  spreadAngle: 40
+  meleeLifeTime: 0.15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
