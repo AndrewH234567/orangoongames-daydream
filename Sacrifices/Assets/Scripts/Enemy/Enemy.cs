@@ -9,8 +9,8 @@ public class Enemy : Entity
     void Update()
     {
         if (UnityEngine.Random.Range(1, 100) > 50)
-            rb.AddForceX(speed);
+            rb.AddForceX(moveSpeed);
         else
-            rb.AddForceX(-speed);
+            rb.AddForceX(-moveSpeed);
     }
 }

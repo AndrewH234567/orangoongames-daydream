@@ -5,18 +5,13 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    // Configuration Fields
-    [Header("Movement")]
-    [SerializeField] public float moveSpeed = 5f;
-    [SerializeField] public float jumpForce = 8f;
-    [SerializeField] public bool isJumping = false;
-
-    public Vector2 movement;
 
     [SerializeField] private InputHandler inputHandler;
     [SerializeField] private Animator animator;
-    [SerializeField] private GroundDetector groundDetector;
 
+    private GroundDetector groundDetector;
+
+    private WeaponController weaponController;
 
     void Awake()
     {
@@ -25,6 +20,7 @@ public class Player : Entity
         inputHandler = GetComponent<InputHandler>();
         animator = GetComponent<Animator>();
         groundDetector = GetComponentInChildren<GroundDetector>();
+        weaponController = GetComponent<WeaponController>();
 
         StartCoroutine(slowAnimation());
 
@@ -66,6 +62,16 @@ public class Player : Entity
         */
         handleHorizontalMovement();
         handleJump();
+        float horizontalMove = Mathf.Abs(rb.linearVelocity.x);
+        if (horizontalMove > 0.01f)
+        {
+            currentFacingDirection = 1f;
+        }
+        else if (horizontalMove < -0.01f)
+        {
+            currentFacingDirection = -1f;
+        }
+        handleAttack();
     }
 
     IEnumerator slowAnimation()
@@ -95,6 +101,38 @@ public class Player : Entity
         if (!groundDetector.isGrounded)
         {
             isJumping = false;
+        }
+    }
+
+    public void handleAttack()
+    {
+        if (inputHandler.isFirePressed)
+        {
+            float verticalInput = inputHandler.verticalAimInput; // (You need to add this property in InputHandler)
+
+            Vector2 aimDirection = new Vector2(currentFacingDirection, 0f);
+
+            if (verticalInput > 0.5f)
+            {
+                // Aim diagonally up
+                aimDirection = new Vector2(currentFacingDirection, 1f);
+            }
+            else if (verticalInput < -0.5f)
+            {
+                aimDirection = new Vector2(currentFacingDirection, -1f);
+            }
+
+            // The key is to normalize it so the resulting vector has a length of 1
+            aimDirection = aimDirection.normalized;
+
+            if (weaponController != null)
+            {
+                weaponController.TryAttack(aimDirection);
+            }
+            else
+            {
+                Debug.LogWarning("Weapon Controller is null");
+            }
         }
     }
 }

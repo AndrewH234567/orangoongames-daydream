@@ -6,8 +6,10 @@ public class InputHandler : MonoBehaviour
 {
     [Header("DEBUG")]
     public Vector2 movement;
-    public Boolean isUpPressed;
+    public bool isUpPressed;
+    public bool isFirePressed;
     public float deadzone = 0.2f;
+    public float verticalAimInput;
     public PlayerActions playerActions;
 
     void Awake()
@@ -15,6 +17,12 @@ public class InputHandler : MonoBehaviour
         playerActions = new PlayerActions();
         playerActions.Controls.Move.performed += GetMovementInput; //Subscribing the events
         playerActions.Controls.Move.canceled += GetMovementInput;
+        playerActions.Controls.Attack.performed += GetAttackInput;
+        playerActions.Controls.Attack.canceled += GetAttackInput;
+        playerActions.Controls.AimUp.performed += GetUpAttackDirection;
+        playerActions.Controls.AimUp.canceled += GetUpAttackDirection;
+        playerActions.Controls.AimDown.performed += GetDownAttackDirection;
+        playerActions.Controls.AimDown.canceled += GetDownAttackDirection;
 
         /*
         inputActions.PlayerActionMap.Shoot.performed += GetShootInput;
@@ -38,7 +46,7 @@ public class InputHandler : MonoBehaviour
     {
 
     }
-    
+
     private void OnEnable()
     {
         playerActions.Controls.Enable();
@@ -62,5 +70,20 @@ public class InputHandler : MonoBehaviour
             isUpPressed = false;
         }
         movement = new Vector2(input.x, 0);
+    }
+
+    private void GetAttackInput(InputAction.CallbackContext context)
+    {
+        isFirePressed = context.ReadValue<float>() >= deadzone;
+    }
+
+    private void GetUpAttackDirection(InputAction.CallbackContext context)
+    {
+        verticalAimInput = context.ReadValue<float>() >= deadzone ? 1 : 0;
+    }
+
+    private void GetDownAttackDirection(InputAction.CallbackContext context)
+    {
+        verticalAimInput = context.ReadValue<float>() >= deadzone ? -1 : 0;
     }
 }
