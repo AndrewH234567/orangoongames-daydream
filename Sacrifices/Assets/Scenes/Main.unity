@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 25617173}
   - component: {fileID: 25617172}
+  - component: {fileID: 25617174}
   m_Layer: 0
   m_Name: WormSpawner
   m_TagString: Untagged
@@ -149,9 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WormSpawner
   wormPrefab: {fileID: 2604093500997856207, guid: f6fc6736c19fb47b78ba630677cc3f3c, type: 3}
-  poolSize: 100
+  poolSize: 500
   spawnInterval: 0.05
-  maxActive: 80
+  maxActive: 300
 --- !u!4 &25617173
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +168,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &25617174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25617171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f336e623e85446ca8103e1cdfbe2742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomMover2D
+  moveRadius: 20
+  moveSpeed: 100
+  waitTime: 0
+  origin: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  waitTimer: 0
 --- !u!1 &106952168
 GameObject:
   m_ObjectHideFlags: 0
