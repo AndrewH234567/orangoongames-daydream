@@ -23,6 +23,8 @@ public class InputHandler : MonoBehaviour
         playerActions.Controls.AimUp.canceled += GetUpAttackDirection;
         playerActions.Controls.AimDown.performed += GetDownAttackDirection;
         playerActions.Controls.AimDown.canceled += GetDownAttackDirection;
+        playerActions.Controls.SwapWeapon0.performed += GetWeapon0;
+        playerActions.Controls.SwapWeapon1.performed += GetWeapon1;
 
         /*
         inputActions.PlayerActionMap.Shoot.performed += GetShootInput;
@@ -85,5 +87,15 @@ public class InputHandler : MonoBehaviour
     private void GetDownAttackDirection(InputAction.CallbackContext context)
     {
         verticalAimInput = context.ReadValue<float>() >= deadzone ? -1 : 0;
+    }
+
+    private void GetWeapon0(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 0;
+    }
+
+    private void GetWeapon1(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() >= deadzone) Player.Instance.GetWeaponController().weaponId = 1;
     }
 }
